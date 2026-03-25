@@ -1,0 +1,31 @@
+# [CONTEXTO ESTRATÉGICO]
+# Missão: Operação de Blog de Alta Performance com CAPEX Zero.
+# Foco: Arbitragem de Tráfego Orgânico para Afiliados e AdSense Revenue.
+
+## 🏗️ STACK TÉCNICA (BOOTSTRAP)
+- **Engine:** Blogger (Google Ecosystem) para indexação acelerada e custo zero.
+- **Protocolo:** HTTPS nativo, foco em Core Web Vitals (LCP, FID, CLS) para ranking.
+- **Integração:** AdSense Auto-Ads + Blocos Fixos Estratégicos.
+
+## 🎨 ARQUITETURA DE UI/UX (MINIMALISMO DINÂMICO)
+- **Layout Home:** "Headline-Driven". Lista de títulos (H2/H3) centralizados, criando um fluxo vertical limpo.
+- **Design:** Espaço negativo (white space) abundante para reduzir a fadiga cognitiva e aumentar o CTR (Click-Through Rate) dos anúncios.
+- **Dinâmica:** Elementos centralizados (`text-align: center`) para foco total na headline da notícia.
+- **Ad-Ready:** Zonas de alta visibilidade reservadas para scripts de publicidade (Above the Fold e Mid-Article).
+
+## 📊 ESTRATÉGIA DE PRODUTO (RECORRÊNCIA E UTILIDADE)
+O conteúdo deve orbitar itens de "Consumo de Necessidade", fugindo da volatilidade de produtos supérfluos:
+1. **Ecossistema Smart Home (Entry Level):** Lâmpadas LED Inteligentes (Argumento: Eficiência Energética).
+2. **Hardwares de Monitoramento:** Plugs Smart com Medição de KWh (Argumento: Gestão de Custos Fixos).
+3. **Consumíveis Críticos:** Refis/Filtros de Purificação (Argumento: Saúde e Recorrência Semestral).
+
+## ✍️ DIRETRIZES DE CONTENT ENGINEERING (SEO & CRO)
+- **Títulos:** Aplicar gatilhos de "Curiosidade" e "Urgência" (Headline Engineering).
+- **Estrutura:** Mínimo de 800 palavras por artigo para garantir densidade semântica e aprovação no AdSense.
+- **Inserção de Links:** Utilizar tabelas comparativas e botões de CTA (Call to Action) claros para Amazon/Mercado Livre.
+- **Tom de Voz:** Autoritativo, porém acessível (Expert-to-Consumer).
+
+## 🤖 INSTRUÇÕES PARA A IA (ANTIGRAVITY/CURSOR)
+- Ao gerar HTML/CSS, priorize código "inline" ou "clean" compatível com XML do Blogger.
+- Assegure que os estilos de títulos mantenham `text-align: center !important`.
+- Ao redigir artigos, foque em palavras-chave de "Intenção de Compra" (ex: "melhor custo-benefício", "vale a pena", "economizar com").

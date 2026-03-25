@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html b:version='2' class='v2' expr:dir='data:blog.languageDirection' xmlns='http://www.w3.org/1999/xhtml' xmlns:b='http://www.google.com/2005/gml/b' xmlns:data='http://www.google.com/2005/gml/data' xmlns:expr='http://www.google.com/2005/gml/expr'>
+<head>
+  <meta charset='utf-8'/>
+  <meta content='width=device-width, initial-scale=1.0' name='viewport'/>
+  
+  <b:include data='blog' name='all-head-content'/>
+  <title><data:blog.pageTitle/></title>
+  
+  <!-- CSS Básico Minimalista Dinâmico -->
+  <b:skin><![CDATA[
+    /* Reset & Base */
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background-color: #ffffff;
+      color: #333333;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    
+    /* Estrutura Principal */
+    .header-wrapper {
+      text-align: center;
+      padding: 3rem 1rem 2rem;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    .header-wrapper h1 {
+      margin: 0;
+      font-size: 2.5rem;
+      letter-spacing: -0.05em;
+    }
+    
+    .main-wrapper {
+      max-width: 720px; /* Largura otimizada para leitura e CTR em texto */
+      margin: 0 auto;
+      padding: 2rem 1rem;
+    }
+    
+    /* Tipografia e Títulos (Conforme Diretriz) */
+    h1, h2, h3, h4, .post-title {
+      text-align: center !important; /* Regra do .cursorrules */
+      font-weight: 800;
+      color: #111111;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+    }
+    .post-title {
+      font-size: 2.2rem;
+      margin-top: 2rem;
+    }
+    .post-title a {
+      color: #111111;
+      text-decoration: none;
+      transition: color 0.2s ease-in-out;
+    }
+    .post-title a:hover {
+      color: #0056b3;
+    }
+    
+    /* Corpo do Texto */
+    .post-body {
+      font-size: 1.15rem;
+      color: #444444;
+      margin-bottom: 2rem;
+    }
+    .post-body p {
+      margin-bottom: 1.5rem;
+    }
+    
+    /* Componentes Estratégicos (CTAs e Tabelas) */
+    .cta-button {
+      display: block;
+      width: fit-content;
+      margin: 2.5rem auto;
+      padding: 1.2rem 2.5rem;
+      background-color: #ff9900; /* Cor padrão Amazon-like para conversão */
+      color: #ffffff !important;
+      text-align: center;
+      text-decoration: none !important;
+      font-weight: bold;
+      font-size: 1.1rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      transition: transform 0.2s, background-color 0.2s;
+    }
+    .cta-button:hover {
+      background-color: #e68a00;
+      transform: translateY(-2px);
+    }
+    
+    /* Zonas de Anúncio (Ad-Ready) */
+    .ad-slot {
+      margin: 3rem auto;
+      text-align: center;
+      min-height: 250px;
+      background: #fafafa;
+      border: 1px dashed #dddddd;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #aaaaaa;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    /* Rodapé */
+    .footer-wrapper {
+      text-align: center;
+      padding: 3rem 1rem;
+      border-top: 1px solid #f0f0f0;
+      font-size: 0.9rem;
+      color: #777777;
+      margin-top: 4rem;
+    }
+  ]]></b:skin>
+
+  <!-- Google Fonts para Tipografia Dinâmica e Moderna -->
+  <link href='https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&amp;display=swap' rel='stylesheet'/>
+</head>
+
+<body>
+  <header class='header-wrapper'>
+    <b:section class='header' id='header' maxwidgets='1' showaddelement='no'>
+      <b:widget id='Header1' locked='true' title='Blog de Oportunidades' type='Header'>
+        <b:includable id='main'>
+          <h1><a expr:href='data:blog.homepageUrl'><data:title/></a></h1>
+          <p><data:description/></p>
+        </b:includable>
+      </b:widget>
+    </b:section>
+  </header>
+
+  <!-- Espaço Estratégico Above the Fold para AdSense Auto-Ads ou Bloco Manual -->
+  <div class='ad-slot'>
+    [AdSense: Bloco de Anúncio Above The Fold (Início)]
+  </div>
+
+  <main class='main-wrapper'>
+    <b:section class='main' id='main' showaddelement='yes'>
+      <b:widget id='Blog1' locked='true' title='Conteúdo' type='Blog'>
+        <b:includable id='main' var='top'>
+          
+          <b:loop values='data:posts' var='post'>
+            <article class='post'>
+              <h2 class='post-title'>
+                <a expr:href='data:post.url'><data:post.title/></a>
+              </h2>
+              
+              <div class='post-body'>
+                <data:post.body/>
+              </div>
+              
+              <!-- Elemento dinâmico de conversão - pode ser substituído/complementado no post -->
+              <b:if cond='data:blog.pageType == &quot;item&quot;'>
+                <div class='ad-slot'>
+                  [AdSense: Bloco de Anúncio Mid-Article (Meio do Artigo)]
+                </div>
+              </b:if>
+            </article>
+          </b:loop>
+
+          <!-- Paginação Simplificada -->
+          <div class='blog-pager'>
+            <b:include name='nextprev'/>
+          </div>
+          
+        </b:includable>
+      </b:widget>
+    </b:section>
+  </main>
+
+  <footer class='footer-wrapper'>
+    <b:section class='footer' id='footer' showaddelement='no'>
+      <b:widget id='Text1' locked='false' title='Sobre' type='Text'>
+        <b:includable id='main'>
+          <p>&amp;copy; <data:blog.title/> - Guias práticos para otimizar seus custos com inteligência.</p>
+        </b:includable>
+      </b:widget>
+    </b:section>
+  </footer>
+</body>
+</html>
