@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O Fim do Desperdício: O Guia Definitivo da Casa Inteligente</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Transformando as cores de fundo dos blocos em semi-transparentes para mostrar o fundo global */
+            --bg-lighting: rgba(255, 249, 240, 0.85); 
+            --bg-energy: rgba(240, 249, 244, 0.85);   
+            --bg-water: rgba(240, 246, 250, 0.85);    
+            
+            --text-main: #2D3748;
+            --text-light: #4A5568;
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --radius-main: 16px;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            background-color: #F0F4F8; /* Cor neutra suave atrás da imagem */
+            position: relative;
+        }
+
+        /* -------------------------------------
+           Background Global com Muita Transparência
+           ------------------------------------- */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            /* Imagem da Casa/Tecnologia */
+            background-image: url('https://images.unsplash.com/photo-1558002038-1055907df827?auto=format&fit=crop&w=1600&q=80');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.08; /* Alta transparência (Watermark effect) */
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .site-container {
+            max-width: 1150px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 40px;
+            align-items: start;
+        }
+
+        @media (max-width: 900px) {
+            .site-container { grid-template-columns: 1fr; }
+        }
+
+        /* -------------------------------------
+           Cabeçalho Hero (Agora no Estilo Glassmorphism / Vidro)
+           ------------------------------------- */
+        .page-header {
+            grid-column: 1 / -1;
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 60px 40px;
+            border-radius: 20px;
+            
+            /* Efeito Vidro Fosco */
+            background-color: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05); 
+            
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .header-content {
+            max-width: 900px;
+        }
+
+        .page-header h1 {
+            font-size: 2.8rem;
+            color: var(--text-main);
+            font-weight: 800;
+            margin-bottom: 25px;
+            line-height: 1.2;
+        }
+
+        .page-header .intro-text {
+            color: var(--text-light);
+            font-size: 1.2rem;
+            text-align: left;
+        }
+
+        .intro-text p {
+            margin-bottom: 15px;
+        }
+        
+        .intro-highlight {
+            background-color: rgba(49, 130, 206, 0.05);
+            border-left: 4px solid #4299E1;
+            padding: 20px;
+            border-radius: 0 12px 12px 0;
+            font-weight: 600;
+            color: #2B6CB0;
+            margin: 25px 0;
+            font-style: italic;
+        }
+
+        /* -------------------------------------
+           Conteúdo Principal
+           ------------------------------------- */
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        .section-block {
+            border-radius: 20px;
+            padding: 30px 20px;
+            box-shadow: 0 4px 25px rgba(0,0,0,0.03);
+            backdrop-filter: blur(8px); /* Para misturar elegantemente com o fundo */
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+
+        .section-lighting { background-color: var(--bg-lighting); border-top: 4px solid #F6AD55; }
+        .section-energy { background-color: var(--bg-energy); border-top: 4px solid #68D391; }
+        .section-water { background-color: var(--bg-water); border-top: 4px solid #63B3ED; }
+
+        .category-title {
+            font-size: 1.4rem;
+            color: var(--text-main);
+            margin: 0 0 25px 0;
+            font-weight: 800;
+        }
+
+        .accordion-item {
+            background-color: var(--card-bg);
+            border-radius: var(--radius-main);
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+            overflow: hidden;
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: 1px solid rgba(0,0,0,0.04);
+        }
+
+        .accordion-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.06);
+        }
+
+        details > summary { list-style: none; outline: none; }
+        details > summary::-webkit-details-marker { display: none; }
+
+        .accordion-header {
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            cursor: pointer;
+            gap: 20px;
+            user-select: none;
+        }
+
+        .accordion-img {
+            width: 70px;
+            height: 70px;
+            border-radius: 12px;
+            object-fit: cover;
+            flex-shrink: 0;
+            border: 1px solid #E2E8F0;
+        }
+
+        .accordion-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            flex-grow: 1;
+            margin: 0;
+            color: var(--text-main);
+            line-height: 1.4;
+        }
+
+        .accordion-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-color: #F3F4F6;
+            color: #718096;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            font-weight: bold;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            line-height: 0;
+        }
+
+        details[open] .accordion-icon {
+            transform: rotate(45deg);
+            background-color: var(--text-main); color: white;
+        }
+
+        .accordion-content {
+            padding: 10px 20px 25px 110px;
+            color: var(--text-light);
+            animation: fadeIn 0.4s ease-in-out;
+            font-size: 0.95rem;
+        }
+
+        .content-subtitle {
+            font-weight: 800;
+            color: var(--text-main);
+            margin: 15px 0 10px;
+            font-size: 1.05rem;
+        }
+
+        .social-proof {
+            background-color: #F7FAFC;
+            border-left: 4px solid #CBD5E0;
+            padding: 12px 15px;
+            font-style: italic;
+            border-radius: 0 8px 8px 0;
+            margin: 15px 0;
+            color: #4A5568;
+        }
+        .social-proof strong { font-style: normal; display: block; margin-bottom: 4px; color: #2D3748; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* -------------------------------------
+           Produto Sutil (Links Corrigidos pra Amazon)
+           ------------------------------------- */
+        .soft-product-card {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-top: 25px;
+            padding: 15px;
+            background-color: #ffffff;
+            border: 1px solid #E2E8F0;
+            border-radius: 12px;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.2s;
+            max-width: 350px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+            position: relative;
+        }
+
+        .soft-product-card::after {
+            content: '🔗 Ver oferta';
+            position: absolute;
+            right: 15px;
+            bottom: 15px;
+            font-size: 0.75rem;
+            color: #3182CE;
+            font-weight: 600;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .soft-product-card:hover { border-color: #90CDF4; background-color: #F0F8FF; transform: translateY(-2px); box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        .soft-product-card:hover::after { opacity: 1; }
+        
+        .soft-product-img { width: 60px; height: 60px; object-fit: cover; border-radius: 8px; border: 1px solid #eee; }
+        .soft-product-details { display: flex; flex-direction: column; justify-content: center; flex-grow: 1; }
+        .soft-product-title { font-size: 0.95rem; font-weight: 700; color: #2D3748; margin-bottom: 4px; }
+        .soft-product-price { font-size: 1.15rem; font-weight: 800; color: #2F855A; }
+        .soft-product-badge { font-size: 0.75rem; background: #EDF2F7; padding: 3px 8px; border-radius: 4px; color: #4A5568; width: fit-content; margin-bottom: 6px; font-weight: 600; }
+
+        /* -------------------------------------
+           CineLivre (Mockup AdSense) Animados
+           ------------------------------------- */
+        @keyframes gentlePulse {
+            0% { transform: scale(1); box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+            50% { transform: scale(1.02); box-shadow: 0 10px 25px rgba(245, 158, 11, 0.2); }
+            100% { transform: scale(1); box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        }
+        
+        @keyframes shineSweep {
+            0% { transform: translateX(-100%); }
+            20% { transform: translateX(200%); }
+            100% { transform: translateX(200%); }
+        }
+
+        .ad-space-horizontal {
+            width: 100%;
+            display: block;
+            text-decoration: none;
+            background: #111827;
+            border-radius: 16px;
+            color: #ffffff;
+            overflow: hidden;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+            position: relative;
+            animation: gentlePulse 4s infinite ease-in-out;
+        }
+        
+        .ad-space-horizontal::after, .sidebar-ad-vertical::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 50%; height: 100%;
+            background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0) 100%);
+            transform: skewX(-25deg) translateX(-150%);
+            animation: shineSweep 6s infinite ease-in-out;
+            pointer-events: none;
+        }
+
+        .ad-space-horizontal img, .sidebar-ad-vertical img {
+            width: 100%;
+            height: auto;
+            display: block;
+            opacity: 0.95;
+            transition: opacity 0.3s;
+        }
+        
+        .ad-space-horizontal:hover img, .sidebar-ad-vertical:hover img { opacity: 1; }
+
+        .ad-badge {
+            position: absolute;
+            z-index: 5;
+            top: 10px;
+            right: 10px;
+            background-color: rgba(0,0,0,0.6);
+            border: 1px solid rgba(255,255,255,0.2);
+            font-size: 0.7rem;
+            padding: 3px 8px;
+            border-radius: 4px;
+            color: #fff;
+            backdrop-filter: blur(4px);
+            font-weight: 600;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            position: sticky;
+            top: 30px;
+        }
+
+        .sidebar-widget {
+            background-color: rgba(255, 255, 255, 0.85); /* Efeito vidro na sidebar tbm */
+            backdrop-filter: blur(8px);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            text-align: center;
+        }
+
+        .sidebar-widget h4 {
+            margin: 0 0 15px 0;
+            color: #2D3748;
+            font-size: 1.1rem;
+            font-weight: 800;
+        }
+
+        .sidebar-ad-vertical {
+            display: block;
+            text-decoration: none;
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            background-color: #111827;
+            animation: gentlePulse 5s infinite ease-in-out;
+            animation-delay: 1s;
+        }
+        
+    </style>
+</head>
+<body>
+
+    <div class="site-container">
+        
+        <!-- CABEÇALHO HERO (Transparente - Efeito Vidro) -->
+        <header class="page-header">
+            <div class="header-content">
+                <h1>O Fim do Desperdício Invisível:<br>O Guia da Casa Eficiente e Saudável</h1>
+                
+                <div class="intro-text">
+                    <p>O mercado de eletrodomésticos foca em te vender a todo instante, mas esconde um segredo obscuro: a maioria dos lares no Brasil joga literalmente o salário ralo abaixo com "consumo silencioso" de energia e troca em aparelhos de água inadequados.</p>
+                    
+                    <div class="intro-highlight">
+                        "Criamos este portal após descobrir que quase 40% de nossa fatura de luz era desperdício vampiro. O que está abaixo não é 'tendência' passageira; é o que realmente abaixa seu custo fixo já no próximo mês."
+                    </div>
+
+                    <p>Nossa curadoria filtra os modismos e te entrega apenas os <strong>15 dispositivos ou conhecimentos cruciais que se pagam sozinhos</strong> num curtíssimo prazo. É a união exata entre o alívio financeiro e a blindagem da saúde da família.</p>
+                </div>
+            </div>
+        </header>
+
+        <!-- CONTEÚDO PRINCIPAL (Esquerda) -->
+        <main class="main-content">
+            
+            <!-- PILAR 1: ILUMINAÇÃO -->
+            <div class="section-block section-lighting">
+                <h2 class="category-title">💡 Iluminação Inteligente e Conforto</h2>
+
+                <details class="accordion-item" open>
+                    <summary class="accordion-header">
+                        <img src="https://placehold.co/150x150/FFF3E0/E65100?text=Luz\nSmart&font=Nunito" alt="Iluminação" class="accordion-img">
+                        <h3 class="accordion-title">1. Conta nas alturas? Como a Automação cortou 20% do gasto mensal</h3>
+                        <div class="accordion-icon">+</div>
+                    </summary>
+                    <div class="accordion-content">
+                        <p>Esquecimento é o vilão. Lâmpadas acesas em corredores ou banheiros por horas drenam a carteira da mesma forma que os eletrônicos grandes.</p>
+                        <h4 class="content-subtitle">Elimine o "Erro Humano" e Dimerize</h4>
+                        <p>Ao trocar para Lâmpadas Wi-Fi, o próprio sistema desliga a casa por inatividade nas madrugadas. Fora isso, se você clarear o cômodo apenas 40% num fim de noite, o uso de KWh desaba junto proporcionalmente.</p>
+                        
+                        <!-- Link substituído de # para Amazon Real (Busca de Teste) -->
+                        <a href="https://www.amazon.com.br/s?k=L%C3%A2mpada+Inteligente+Wi-Fi+10W" class="soft-product-card" target="_blank">
+                            <img src="https://placehold.co/100x100/FFFFFF/4A5568?text=Lamp\nWi-Fi&font=Nunito" alt="Lâmpada Positivo" class="soft-product-img">
+                            <div class="soft-product-details">
+                                <span class="soft-product-badge">Instalação 2 minutos</span>
+                                <span class="soft-product-title">Lâmpada Inteligente Wi-Fi 10W</span>
+                                <span class="soft-product-price">R$ 49,90</span>
+                            </div>
+                        </a>
+                    </div>
+                </details>
+
+                <details class="accordion-item">
+                    <summary class="accordion-header">
+                        <img src="https://placehold.co/150x150/FFF3E0/E65100?text=Sinal\nForte&font=Nunito" alt="Sinal" class="accordion-img">
+                        <h3 class="accordion-title">2. Estabilidade Wi-Fi na Casa: O embate Intelbras vs Positivo</h3>
+                        <div class="accordion-icon">+</div>
+                    </summary>
+                    <div class="accordion-content">
+                        <p>Dispositivos de menor valor costumam ter receptores de internet horríveis, morrendo no quarto que fica longe do roteador.</p>
+                        <a href="https://www.amazon.com.br/s?k=L%C3%A2mpada+Smart+Wi-Fi+Intelbras" class="soft-product-card" target="_blank">
+                            <img src="https://placehold.co/100x100/FFFFFF/4A5568?text=Robusta&font=Nunito" alt="Intelbras" class="soft-product-img">
+                            <div class="soft-product-details">
+                                <span class="soft-product-badge">Wi-Fi Robusto Distante</span>
+                                <span class="soft-product-title">Lâmpada Smart Intelbras E27</span>
+                                <span class="soft-product-price">R$ 55,00</span>
+                            </div>
+                        </a>
+                    </div>
+                </details>
+                
+                <details class="accordion-item">
+                    <summary class="accordion-header">
+                        <img src="https://placehold.co/150x150/FFF3E0/E65100?text=Anti\nRoubo&font=Nunito" alt="Anti Furto" class="accordion-img">
+                        <h3 class="accordion-title">3. Modo Férias: Simule pessoas em casa e blinde as portas contra assaltos</h3>
+                        <div class="accordion-icon">+</div>
+                    </summary>
+                    <div class="accordion-content">
+                        <p>As lâmpadas obedecem a rituais. Acendendo aleatoriamente na sala parecendo ativamente que uma família habita a casa durante as madrugadas.</p>
+                        <a href="https://www.amazon.com.br/s?k=L%C3%A2mpada+Inteligente+Forte" class="soft-product-card" target="_blank">
+                            <img src="https://placehold.co/100x100/FFFFFF/4A5568?text=Luz\n12W&font=Nunito" alt="Luz 12W" class="soft-product-img">
+                            <div class="soft-product-details">
+                                <span class="soft-product-badge">Para Garagens e Quintais</span>
+                                <span class="soft-product-title">Lâmpada Super Forte (+12W)</span>
+                                <span class="soft-product-price">R$ 64,50</span>
+                            </div>
+                        </a>
+                    </div>
+                </details>
+
+                <details class="accordion-item">
+                    <summary class="accordion-header">
+                        <img src="https://placehold.co/150x150/FFF3E0/E65100?text=Fita\nLED&font=Nunito" alt="Fita RGB" class="accordion-img">
+                        <h3 class="accordion-title">4. Transforme a Sala num Cinema Escuro investindo apenas em Fita LED</h3>
+                        <div class="accordion-icon">+</div>
+                    </summary>
+                    <div class="accordion-content">
+                        <p>Muitas pessoas pagam grandes quantias em plafons decorativos quando só precisavam colar uma Fita LED inteligente atrás do painel da televisão.</p>
+                        <a href="https://www.amazon.com.br/s?k=Fita+LED+Inteligente+Wi-Fi" class="soft-product-card" target="_blank">
+                            <img src="https://placehold.co/100x100/FFFFFF/4A5568?text=Fita3M&font=Nunito" alt="Fita RGB 3M" class="soft-product-img">
+                            <div class="soft-product-details">
+                                <span class="soft-product-badge">Atrás da TV / Sanca</span>
+                                <span class="soft-product-title">Fita LED RGB Wi-Fi 3m</span>
+                                <span class="soft-product-price">R$ 89,90</span>
+                            </div>
+                        </a>
+                    </div>
+                </details>
+
+                <details class="accordion-item">
+                    <summary class="accordion-header">
+                        <img src="https://placehold.co/150x150/FFF3E0/E65100?text=Alexa\nCon&font=Nunito" alt="Alexa" class="accordion-img">
+                        <h3 class="accordion-title">5. O medo da voz: Um idoso conectando tudo em poucos cliques pelo celular</h3>
+                        <div class="accordion-icon">+</div>
+                    </summary>
+                    <div class="accordion-content">
+                        <p>O aplicativo te pede a senha do wifi local e o botão "Vincular à Assistente" faz tudo pelo sistema sem que seja necessário ser técnico.</p>
+                        <a href="https://www.amazon.com.br/s?k=Echo+Dot+Alexa" class="soft-product-card" target="_blank">
+                            <img src="https://placehold.co/100x100/FFFFFF/4A5568?text=Alexa&font=Nunito" alt="Alexa Echo" class="soft-product-img">
+                            <div class="soft-product-details">
+                                <span class="soft-product-badge">O Cérebro da Casa</span>
+                                <span class="soft-product-title">Echo Pop (C/ Alexa)</span>
+                                <span class="soft-product-price">R$ 299,00</span>
+                            </div>
+                        </a>
+                    </div>
+                </details>
+            </div>
+
+            <!-- PUBLICIDADE HORIZONTAL DOM DINÂMICO (Mockup CineLivre) -->
+            <a href="https://sirtolithiago.github.io/cinelivre/" target="_blank" class="ad-space-horizontal">
+                <span class="ad-badge">Patrocinado</span>
+                <img id="ad-horizontal" src="https://placehold.co/900x200/111827/F59E0B?text=Filmes+Grátis+no+CineLivre\nCarregando...&font=Nunito" alt="Banner CineLivre Horizontal">
+            </a>
+
+            <!-- PILAR 2: TOMADAS INTELIGENTES -->
+            <div class="section-block section-energy">
+                <h2 class="category-title">🔌 Hardwares "Detetives" (Smart Plugs)</h2>
+
+                <details class="accordion-item">
+                    <summary class="accordion-header">
+                        <img src="https://placehold.co/150x150/E8F5E9/2E7D32?text=Tomada\nKWh&font=Nunito" alt="Tomada Parede" class="accordion-img">
+                        <h3 class="accordion-title">6. Isolando o Ladrão de Fatura: Descubra e substitua eletrônicos velhos</h3>
+                        <div class="accordion-icon">+</div>
+                    </summary>
+                    <div class="accordion-content">
+                        <p>O celular te mostrará em tempo real os Watts puxados por aquele motor estragado da geladeira sem a intervenção cara de eletricistas.</p>
+                        <a href="https://www.amazon.com.br/s?k=Tomada+Inteligente+Wi-fi+Medidor" class="soft-product-card" target="_blank">
+                            <img src="https://placehold.co/100x100/FFFFFF/4A5568?text=Medidor&font=Nunito" alt="Tomada M" class="soft-product-img">
+                            <div class="soft-product-details">
+                                <span class="soft-product-badge">Monitora Energia</span>
+                                <span class="soft-product-title">Tomada Inteligente com Medidor</span>
+                                <span class="soft-product-price">R$ 54,90</span>
+                            </div>
+                        </a>
+                    </div>
+                </details>
+
+                <details class="accordion-item">
+                    <summary class="accordion-header">
+                        <img src="https://placehold.co/150x150/E8F5E9/2E7D32?text=Kit\n16A&font=Nunito" alt="Kit Tomadas" class="accordion-img">
+                        <h3 class="accordion-title">7. A Regra do Derretimento (Atenção ao perigo de 10A vs 16A)</h3>
+                        <div class="accordion-icon">+</div>
+                    </summary>
+                    <div class="accordion-content">
+                        <p>Aparelhos pesados engasgam tomadas fracas. Mostrar os pinos corretos é a diferença vital entre automação e perigo térmico para micro-ondas.</p>
+                        <a href="https://www.amazon.com.br/s?k=Smart+Plug+Wi-fi+16A+ou+20A" class="soft-product-card" target="_blank">
+                            <img src="https://placehold.co/100x100/FFFFFF/4A5568?text=Fio\nGrosso&font=Nunito" alt="Fio 16A" class="soft-product-img">
+                            <div class="soft-product-details">
+                                <span class="soft-product-badge">Altamente Seguro</span>
+                                <span class="soft-product-title">Smart Plug 16A Reforçado</span>
+                                <span class="soft-product-price">R$ 89,90</span>
+                            </div>
+                        </a>
+                    </div>
+                </details>
+
+                <details class="accordion-item">
+                    <summary class="accordion-header">
+                        <img src="https://placehold.co/150x150/E8F5E9/2E7D32?text=Térmico\nFrio&font=Nunito" alt="Ar Cond" class="accordion-img">
+                        <h3 class="accordion-title">8. Interrompendo o motor de noite: A tática que cortou custos do Ar-Condicionado</h3>
+                        <div class="accordion-icon">+</div>
+                    </summary>
+                    <div class="accordion-content">
+                        <p>Cortar a corrente de energia as cinco da manhã poupa faturas caríssimas. O frio inercial retido pela parede conserva a temperatura mantendo o sono tranquilo e confortável.</p>
+                    </div>
+                </details>
+            </div>
+
+            <!-- PILAR 3: ÁGUA -->
+            <div class="section-block section-water">
+                <h2 class="category-title">💧 Saúde Vital e Pura (Refis Filtrantes)</h2>
+
+                <details class="accordion-item">
+                    <summary class="accordion-header">
+                        <img src="https://placehold.co/150x150/E3F2FD/1565C0?text=Água\nVencida&font=Nunito" alt="Água Pura" class="accordion-img">
+                        <h3 class="accordion-title">11. Beber pela cor cristalina e engolir problemas das mangueiras internas</h3>
+                        <div class="accordion-icon">+</div>
+                    </summary>
+                    <div class="accordion-content">
+                        <p>Resetar a luz de troca de filtro sem tirar a peça exaurida condena toda a passagem da água ao contágio biológico no tubo de decantação.</p>
+                        <a href="https://www.amazon.com.br/s?k=Refil+Purificador+Original" class="soft-product-card" target="_blank">
+                            <img src="https://placehold.co/100x100/FFFFFF/4A5568?text=Refil\nBactéria&font=Nunito" alt="Refil Orig" class="soft-product-img">
+                            <div class="soft-product-details">
+                                <span class="soft-product-badge">Blindado e Seguro</span>
+                                <span class="soft-product-title">Refil Oficial do Purificador</span>
+                                <span class="soft-product-price">R$ 49,90</span>
+                            </div>
+                        </a>
+                    </div>
+                </details>
+
+                <details class="accordion-item">
+                    <summary class="accordion-header">
+                        <img src="https://placehold.co/150x150/E3F2FD/1565C0?text=Barato\nPuro&font=Nunito" alt="Filtro Paralelo" class="accordion-img">
+                        <h3 class="accordion-title">12. Despedida Cruel aos R$ 130 originais: A ascensão do Refil Clone Classe A</h3>
+                        <div class="accordion-icon">+</div>
+                    </summary>
+                    <div class="accordion-content">
+                        <p>Fábricas parceiras, com autorização do Inmetro, reproduzem o cartucho com filtragem grau médico exigindo apenas 40 reais ao ano das famílias conscientes da oportunidade.</p>
+                        <a href="https://www.amazon.com.br/s?k=Refil+Planeta+Agua+Elextrolux" class="soft-product-card" target="_blank">
+                            <img src="https://placehold.co/100x100/FFFFFF/4A5568?text=ClasseA&font=Nunito" alt="Filtro WFS" class="soft-product-img">
+                            <div class="soft-product-details">
+                                <span class="soft-product-badge">Homologado Inmetro</span>
+                                <span class="soft-product-title">Refil Compatível Electrolux/Consul</span>
+                                <span class="soft-product-price">R$ 39,90</span>
+                            </div>
+                        </a>
+                    </div>
+                </details>
+                
+                <details class="accordion-item">
+                    <summary class="accordion-header">
+                        <img src="https://placehold.co/150x150/E3F2FD/1565C0?text=Upgrade\npH+&font=Nunito" alt="pH" class="accordion-img">
+                        <h3 class="accordion-title">15. Elevação Biológica: Refis Premium Injetores de Íons e Alcalinidade</h3>
+                        <div class="accordion-icon">+</div>
+                    </summary>
+                    <div class="accordion-content">
+                        <p>A máquina é a lataria; A purificação acontece na ponta. Aproveite o momento da reposição sazonal para escolher tubos com adição de Prata Cloroidal antiácida, acalmando gastrites pelo balizamento alcalino contínuo.</p>
+                        <a href="https://www.amazon.com.br/s?k=Refil+Alcalino+Purificador" class="soft-product-card" target="_blank">
+                            <img src="https://placehold.co/100x100/FFFFFF/4A5568?text=Premium\nAlcalino&font=Nunito" alt="Alcalino" class="soft-product-img">
+                            <div class="soft-product-details">
+                                <span class="soft-product-badge">Upgrade Clínico (+ Saúde)</span>
+                                <span class="soft-product-title">Cápsula Alta Volatilidade de pH</span>
+                                <span class="soft-product-price">R$ 68,00</span>
+                            </div>
+                        </a>
+                    </div>
+                </details>
+            </div>
+
+        </main>
+
+        <!-- SIDEBAR (Coluna Direita) -->
+        <aside class="sidebar">
+            <div class="sidebar-widget">
+                <h4>Patrocinadores 🍿</h4>
+                <a href="https://sirtolithiago.github.io/cinelivre/" target="_blank" class="sidebar-ad-vertical">
+                    <span class="ad-badge">Anúncio</span>
+                    <img id="ad-square" src="https://placehold.co/300x250/064E3B/34D399?text=CineLivre\nCarregando...&font=Nunito" alt="Ad CineLivre Block 1">
+                </a>
+                <p style="font-size: 0.85rem; color: #718096; margin-top: 10px;">Assista seus filmes e séries favoritos direto no navegador de forma gratuita através do catálogo CineLivre Hub.</p>
+            </div>
+
+            <div class="sidebar-widget" style="padding: 10px; background: rgba(250, 250, 250, 0.8);">
+                <a href="https://sirtolithiago.github.io/cinelivre/" target="_blank" class="sidebar-ad-vertical" style="animation-delay: 2s;">
+                    <span class="ad-badge" style="background: rgba(0,0,0,0.8);">Publicidade</span>
+                    <img id="ad-sky" src="https://placehold.co/300x500/831843/F9A8D4?text=Top+Stream\nCarregando...&font=Nunito" alt="Ad CineLivre Block 2">
+                </a>
+            </div>
+        </aside>
+
+    </div>
+
+    <!-- SCRIPT JS DE ROTAÇÃO E ANIMAÇÃO -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const horizontals = [
+                "https://placehold.co/900x200/111827/F59E0B?text=Filmes+Grátis+no+CineLivre\n(Lançamentos+da+Semana)&font=Nunito",
+                "https://placehold.co/900x200/4C1D95/34D399?text=Assista+As+Melhores\nSéries+E+Trilogias+Gratuito&font=Nunito",
+                "https://placehold.co/900x200/7F1D1D/FCA5A5?text=CineLivre:+O+Maior\nAcervo+De+Suspense+E+Terror&font=Nunito"
+            ];
+            
+            const squares = [
+                "https://placehold.co/300x250/111827/F59E0B?text=CineLivre\nÚltimos+Lançamentos&font=Nunito",
+                "https://placehold.co/300x250/064E3B/34D399?text=CineLivre\nFicção+Científica&font=Nunito",
+                "https://placehold.co/300x250/4C1D95/FCA5A5?text=CineLivre\nClássicos+Nostálgicos&font=Nunito"
+            ];
+            
+            const skyscrapers = [
+                "https://placehold.co/300x500/1F2937/FCD34D?text=O+Melhor\nStreaming\n(Sem+Cartão)\nAcesse+CineLivre&font=Nunito",
+                "https://placehold.co/300x500/831843/F9A8D4?text=Séries\nCompletas\n(Dubladas)\nTotalmente+Free&font=Nunito",
+                "https://placehold.co/300x500/0F766E/5EEAD4?text=Top+10\nFilmes\nMais+Assistidos\nConfira+Agora&font=Nunito"
+            ];
+
+            const RndH = Math.floor(Math.random() * horizontals.length);
+            const RndS = Math.floor(Math.random() * squares.length);
+            const RndSky = Math.floor(Math.random() * skyscrapers.length);
+
+            document.getElementById('ad-horizontal').src = horizontals[RndH];
+            document.getElementById('ad-square').src = squares[RndS];
+            document.getElementById('ad-sky').src = skyscrapers[RndSky];
+        });
+    </script>
+</body>
+</html>
